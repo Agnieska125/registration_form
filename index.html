@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="lt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <title>Registracija</title>
+</head>
+
+<body>
+    <section class="registration-window">
+        <div class="form-container">
+            <h2>Registracija</h2>
+            <div class="success-message" id="successMessage"></div>
+            <form id="registrationForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Vardas:</label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">El. paštas:</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <label for="birthDate">Gimimo data:</label>
+                <input type="date" id="birthDate" name="birthDate" required>
+                <div id="birthError" class="error-message"></div>
+
+
+                <!-- AMŽIAUS FORMA JEI NENAUDOJU GIMIMO DATOS -->
+                <!-- <div class="form-group">
+                    <label for="age">Amžius:</label>
+                    <input type="number" id="age" name="age" min="18" max="120" required>
+                    <div class="error-message" id="ageError"></div>
+                </div> -->
+
+                <div class="form-group">
+                    <label for="phone">Telefono numeris:</label>
+                    <input type="text" id="phone" name="phone" placeholder="+370 xxx xxxxx" required>
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Slaptažodis:</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Pakartokite slaptažodį:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+
+                <button type="submit">Registruotis</button>
+            </form>
+
+        </div>
+    </section>
+</body>
+
+</html>
