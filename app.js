@@ -51,7 +51,7 @@ form.addEventListener('submit', function (event) {
             : ageCalc - 1;
 
         if (isNaN(age) || age < 18 || age > 120) {
-            birthError.textContent = 'Amžius nurodytas neteisingai, norėdami pateikti registraciją turite būti vyresnins nei 18 metų.';
+            birthError.textContent = 'Amžius nurodytas neteisingai, norėdami pateikti registraciją turite būti vyresnis nei 18 metų.';
             isValid = false;
         } else {
             birthError.textContent = '';
