@@ -64,6 +64,18 @@ input {
     margin: 20px 0px;
 }
 
+.main-error-message {
+    height: 60px;
+    background-color: rgba(226, 104, 104, 0.212);
+    border-radius: 4px;
+    color: red;
+    font-size: 1em;
+    text-align: center;
+    padding-top: 23px;
+    display: none;
+    margin: 20px 0px;
+}
+
 button {
     width: 100%;
     padding: 10px;

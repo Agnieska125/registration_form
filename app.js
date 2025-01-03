@@ -7,9 +7,18 @@ form.addEventListener('submit', function (event) {
 
     const name = document.getElementById('name').value;
     const nameError = document.getElementById('nameError');
-    const nameRegex = /^[A-Za-zĄČĘĖĮŠŲŪŽąčęėįšųūž]{2,30}$/;
-    if (!nameRegex.test(name)) {
+
+    const nameTooShortOrLong = name.length < 2 || name.length > 30;
+    const nameContainsInvalidCharacters = /[^A-Za-zĄČĘĖĮŠŲŪŽąčęėįšųūž]/.test(name);
+
+    if (nameTooShortOrLong && nameContainsInvalidCharacters) {
+        nameError.innerText = 'Vardas turi būti nuo 2 iki 30 raidžių ir negali turėti skaičių ar specialių simbolių.';
+        isValid = false;
+    } else if (nameTooShortOrLong) {
         nameError.innerText = 'Vardas turi būti nuo 2 iki 30 raidžių.';
+        isValid = false;
+    } else if (nameContainsInvalidCharacters) {
+        nameError.innerText = 'Vardas negali turėti skaičių ar specialių simbolių.';
         isValid = false;
     } else {
         nameError.innerText = '';
@@ -19,7 +28,7 @@ form.addEventListener('submit', function (event) {
     const emailError = document.getElementById('emailError');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        emailError.innerText = 'Įveskite teisingą el. pašto adresą.';
+        emailError.innerText = 'El. pašto adresas nurodytas netinkamai. Įveskite teisingą el. pašto adresą.';
         isValid = false;
     } else {
         emailError.innerText = '';
@@ -30,8 +39,8 @@ form.addEventListener('submit', function (event) {
     let age = null;
 
     function validateAge() {
-        const today = new Date(); // Dabartinė data
-        const birthDate = new Date(birthDateInput.value); // Vartotojo pasirinkta data
+        const today = new Date();
+        const birthDate = new Date(birthDateInput.value);
 
         const ageCalc = today.getFullYear() - birthDate.getFullYear();
         const monthDifference = today.getMonth() - birthDate.getMonth();
@@ -42,7 +51,7 @@ form.addEventListener('submit', function (event) {
             : ageCalc - 1;
 
         if (isNaN(age) || age < 18 || age > 120) {
-            birthError.textContent = 'Amžius turi būti tarp 18 ir 120 metų.';
+            birthError.textContent = 'Amžius nurodytas neteisingai, norėdami pateikti registraciją turite būti vyresnins nei 18 metų.';
             isValid = false;
         } else {
             birthError.textContent = '';
@@ -56,7 +65,7 @@ form.addEventListener('submit', function (event) {
     // const age = document.getElementById('age').value;
     // const ageError = document.getElementById('ageError');
     // if (age < 18 || age > 120) {
-    //     ageError.innerText = 'Amžius turi būti tarp 18 ir 120.';
+    //     ageError.innerText = 'Amžius nurodytas neteisingai, norėdami pateikti registraciją turite būti vyresnins nei 18 metų.';
     //     isValid = false;
     // } else {
     //     ageError.innerText = '';
@@ -64,9 +73,9 @@ form.addEventListener('submit', function (event) {
 
     const phone = document.getElementById('phone').value;
     const phoneError = document.getElementById('phoneError');
-    const phoneRegex = /^\+\d{3}\d{3}\d{5}$/;
+    const phoneRegex = /^\+\d{1,3}\d{3}\d{5}$/;
     if (!phoneRegex.test(phone)) {
-        phoneError.innerText = 'Telefono numeris turi būti formatu +370 xxx xxxxx.';
+        phoneError.innerText = 'Telefono numeris turi būti pateiktas formatu +370xxxxxxxx.';
         isValid = false;
     } else {
         phoneError.innerText = '';
@@ -92,12 +101,15 @@ form.addEventListener('submit', function (event) {
     }
 
     const successMessage = document.getElementById('successMessage');
+    const mainErrorMessage = document.getElementById('mainErrorMessage');
+
     if (isValid) {
         successMessage.innerText = 'Registracija sėkminga!';
         successMessage.style.display = 'block';
         setTimeout(() => {
             successMessage.style.display = 'none';
         }, 3000);
+
         const user = {
             name: name,
             email: email,
@@ -106,8 +118,14 @@ form.addEventListener('submit', function (event) {
         };
         console.log(user);
         form.reset();
+        mainErrorMessage.style.display = 'none';
     } else {
         successMessage.innerText = '';
+        mainErrorMessage.innerText = 'Prašome ištaisyti klaidas formoje ir pabandyti dar kartą.';
+        mainErrorMessage.style.display = 'block';
+        setTimeout(() => {
+            mainErrorMessage.style.display = 'none';
+        }, 3000);
     }
 });
 
